@@ -8,10 +8,12 @@
         <div class="grid grid-cols-4 mx-32 gap-6">
             {% for product in products %}
                 <div class="rounded-lg shadow-lg m-1 border border-gray-200 p-4">
-                    <img class="rounded-md w-80 h-60 mx-auto object-cover" src="{{product.image.url}}" alt="">
-                    <a class="font-semibold text-lg" href="">{{product.name}}</a>
-                    <p class="text-green-500 font-bold text-lg">${{product.price}}</p>
-                    <p class="text-gray-600">{{product.description}}</p>
+                    <a href="{{product.get_absolute_url}}">
+                        <img class="rounded-md w-80 h-60 mx-auto object-cover" src="{{product.image.url}}" alt="">
+                        <p class="font-semibold text-lg" href="">{{product.name}}</p>
+                        <p class="text-green-500 font-bold text-lg">${{product.price}}</p>
+                        <p class="text-gray-600">{{product.description}}</p>
+                    </a>
                 </div>
             {% endfor %}
         </div>
@@ -19,12 +21,3 @@
 {% endblock %}
 
 
-<h1>this is the index page</h1>
-    {% for product in products %}
-        <div>
-            <img src="{{product.image.url}}" alt="">
-            <h2>{{product.name}}</h2>
-            <h3>${{product.price}}</h3>
-            <p>{{product.description}}</p>
-        </div>
-    {% endfor %}
