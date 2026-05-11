@@ -1,14 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>this is the index page</h1>
-    {%for product in products %}
-        <div>{{product.name}}</div>
+{% extends "myapp/base.html" %}
+{% block body %}
+    <div>
+        <h1 class="text-2xl px-32 pt-15 ">Today's Deals</h1>
+        <div class="px-32">
+            <hr class="border-t my-6" >
+        </div>
+        <div class="grid grid-cols-4 mx-32 gap-6">
+            {% for product in products %}
+                <div class="rounded-lg shadow-lg m-1 border border-gray-200 p-4">
+                    <img class="rounded-md w-80 h-60 mx-auto object-cover" src="{{product.image.url}}" alt="">
+                    <a class="font-semibold text-lg" href="">{{product.name}}</a>
+                    <p class="text-green-500 font-bold text-lg">${{product.price}}</p>
+                    <p class="text-gray-600">{{product.description}}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>    
+{% endblock %}
+
+
+<h1>this is the index page</h1>
+    {% for product in products %}
+        <div>
+            <img src="{{product.image.url}}" alt="">
+            <h2>{{product.name}}</h2>
+            <h3>${{product.price}}</h3>
+            <p>{{product.description}}</p>
+        </div>
     {% endfor %}
-</body>
-</html>
