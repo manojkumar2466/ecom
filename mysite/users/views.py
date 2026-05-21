@@ -26,7 +26,7 @@ def register(request):
                 "token":account_activation_token.make_token(user),
             })
             user.email_user(subject=subject,message= message)
-            return redirect("users:email_verification_sent")
+            return redirect("email_verification_sent")
 
     context ={
         "form":form,
@@ -55,7 +55,7 @@ def user_login(request):
 
 def user_logout(request):
     logout(request)
-    return redirect("users:login")
+    return redirect("login")
 
 def profile(request):
     if request.method=="POST":
@@ -75,9 +75,9 @@ def email_verification(request, uidb64, token):
     if user and account_activation_token.check_token(user, token):
         user.is_active=True
         user.save()
-        return redirect("users:email_verification_success")
+        return redirect("email_verification_success")
     else:
-        return redirect("users:email_verification_failed")
+        return redirect("email_verification_failed")
 
    
 
