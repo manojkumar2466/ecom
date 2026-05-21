@@ -1,0 +1,59 @@
+{% extends 'myapp/base.html' %}
+{% block body %}
+<h1>checkout page</h1>
+<form action="">
+    <h2>Confrim your address</h2>
+    <div>
+        <label for="">Full Name</label>
+        <input type="text" value="{{address.full_name}}">
+    </div>   
+    <div>
+        <label for="">phone</label>
+        <input type="text" value="{{address.phone}}">
+    </div>
+    <div>
+        <label for="">Line 1</label>
+        <input type="text" value="{{address.line1}}">
+    </div>
+    <div>
+        <label for="">Line 2</label>
+        <input type="text" value="{{address.line2}}">
+    </div>   
+    <div>
+        <label for="">City</label>
+        <input type="text" value="{{address.city}}">
+    </div>
+    <div>
+        <label for="">state</label>
+        <input type="text" value="{{address.state}}">
+    </div>
+    <div>
+        <label for="">County</label>
+        <input type="text" value="{{address.country}}">
+    </div>
+    <div>
+        <label for="">PIN code</label>
+        <input type="text" value="{{address.pin_code}}">
+    </div>
+    <button class="bg-yellow-400" type="submit" id="co">Complete order</button>
+</form>
+<script>
+    $(document).on("click",'#co', function(e){
+        e.preventDefault()
+        $.ajax({
+            type:"POST",
+            url : "{% url 'place_order' %}",
+            data: {
+                csrfmiddlewaretoken : "{{csrf_token}}",
+                action :"post",
+            },
+            success: function(e){
+                window.location.replace("{% url 'order_success' %}");
+            },
+            error:function(e){
+                window.location.reload("{url 'order_failed'}");
+            }
+        })
+    })
+</script>
+{% endblock %}
